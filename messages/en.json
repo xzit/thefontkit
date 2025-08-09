@@ -10,6 +10,23 @@
     "title": "Hello world!",
     "header": {
       "trigger": "Customize"
+    },
+    "sidebar": {
+      "settings": {
+        "title": "Settings",
+        "description": "Customize the font kit",
+        "form": {
+          "display": "Display",
+          "heading": "Heading",
+          "body": "Body"
+        }
+      }
+    },
+    "preview": {
+      "homepage": {
+        "heading": "Lorem ipsum dolor sit amet",
+        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet quam eget mi mollis eleifend quis eget dui. Ut lorem leo, porta eget mi vitae, dignissim tincidunt mauris. Praesent consequat purus."
+      }
     }
   },
   "Components": {
@@ -17,6 +34,10 @@
       "light": "Light",
       "dark": "Dark",
       "system": "System"
+    },
+    "combobox": {
+      "placeholder": "Select a {label} font...",
+      "empty": "No font found."
     }
   }
 }
