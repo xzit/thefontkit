@@ -1,0 +1,22 @@
+{
+  "AppLayout": {
+    "name": "The Font Kit",
+    "seo": {
+      "title": "The Font Kit",
+      "description": "The Font Kit"
+    }
+  },
+  "Dashboard": {
+    "title": "Hello world!",
+    "header": {
+      "trigger": "Customize"
+    }
+  },
+  "Components": {
+    "theme": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    }
+  }
+}
