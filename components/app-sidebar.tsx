@@ -1,16 +1,17 @@
 import * as React from "react";
+import { useTranslations } from "next-intl";
 
 import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
-  SidebarRail,
+  SidebarFooter,
 } from "@/components/ui/sidebar";
 import Editor from "@/app/(editor)/components/editor";
-import { useTranslations } from "next-intl";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const t = useTranslations("AppLayout");
+
   return (
     <Sidebar variant="floating" {...props}>
       <SidebarHeader>
@@ -19,7 +20,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <Editor />
       </SidebarContent>
-      <SidebarRail />
     </Sidebar>
   );
 }

@@ -1,7 +1,6 @@
-// app/api/fonts/route.ts
 export async function GET() {
   const res = await fetch("https://api.fontsource.org/v1/fonts", {
-    next: { revalidate: 60 * 60 }, // refrescar cada 1 hora
+    next: { revalidate: 60 * 60 * 24 },
   });
 
   if (!res.ok) {

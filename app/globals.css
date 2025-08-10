@@ -126,10 +126,12 @@
   }
   .preview {
     font-family: var(--font-body);
+    font-weight: var(--font-body-weight);
   }
 
   .preview h1.display {
     font-family: var(--font-display);
+    font-weight: var(--font-display-weight);
   }
 
   .preview h1,
@@ -139,5 +141,6 @@
   .preview h5,
   .preview h6 {
     font-family: var(--font-heading);
+    font-weight: var(--font-heading-weight);
   }
 }

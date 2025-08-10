@@ -9,17 +9,20 @@
   "Dashboard": {
     "title": "Hello world!",
     "header": {
-      "trigger": "Customize"
+      "trigger": "Customize",
+      "sponsor": "Sponsor"
     },
     "sidebar": {
-      "settings": {
-        "title": "Settings",
+      "font-family": {
+        "title": "Font Family",
         "description": "Customize the font kit",
         "form": {
           "display": "Display",
           "heading": "Heading",
-          "body": "Body"
-        }
+          "body": "Body",
+          "weight": "Weight"
+        },
+        "error": "An error occurred while loading the fonts."
       }
     },
     "preview": {
