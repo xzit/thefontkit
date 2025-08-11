@@ -28,6 +28,67 @@ const presets = [
     heading: { fontId: "instrument-sans", weight: 600, size: 28 },
     body: { fontId: "instrument-sans", weight: 400, size: 18 },
   },
+  {
+    display: { fontId: "manrope", weight: 800, size: 48 },
+    heading: { fontId: "manrope", weight: 600, size: 28 },
+    body: { fontId: "newsreader", weight: 400, size: 18 },
+  },
+  {
+    display: { fontId: "libre-baskerville", weight: 700, size: 48 },
+    heading: { fontId: "libre-franklin", weight: 700, size: 28 },
+    body: { fontId: "libre-franklin", weight: 400, size: 18 },
+  },
+  {
+    display: { fontId: "gloock", weight: 400, size: 48 },
+    heading: { fontId: "epilogue", weight: 600, size: 26 },
+    body: { fontId: "epilogue", weight: 400, size: 18 },
+  },
+  {
+    display: { fontId: "syne", weight: 700, size: 48 },
+    heading: { fontId: "montserrat", weight: 600, size: 26 },
+    body: { fontId: "montserrat", weight: 400, size: 18 },
+  },
+  {
+    display: { fontId: "space-grotesk", weight: 700, size: 48 },
+    heading: { fontId: "space-grotesk", weight: 600, size: 28 },
+    body: { fontId: "albert-sans", weight: 400, size: 18 },
+  },
+  {
+    display: { fontId: "playfair-display", weight: 700, size: 48 },
+    heading: { fontId: "playfair", weight: 700, size: 30 },
+    body: { fontId: "nunito", weight: 400, size: 18 },
+  },
+  {
+    display: { fontId: "space-mono", weight: 700, size: 48 },
+    heading: { fontId: "work-sans", weight: 600, size: 26 },
+    body: { fontId: "work-sans", weight: 400, size: 18 },
+  },
+  {
+    display: { fontId: "fraunces", weight: 700, size: 48 },
+    heading: { fontId: "fraunces", weight: 600, size: 28 },
+    body: { fontId: "dm-sans", weight: 400, size: 18 },
+  },
+  {
+    display: { fontId: "petrona", weight: 800, size: 48 },
+    heading: { fontId: "petrona", weight: 700, size: 28 },
+    body: { fontId: "karla", weight: 400, size: 18 },
+  },
+  {
+    display: { fontId: "jetbrains-mono", weight: 700, size: 48 },
+    heading: { fontId: "roboto-mono", weight: 600, size: 28 },
+    body: { fontId: "roboto-mono", weight: 400, size: 18 },
+  },
+
+  {
+    display: { fontId: "archivo-narrow", weight: 700, size: 48 },
+    heading: { fontId: "archivo-narrow", weight: 600, size: 28 },
+    body: { fontId: "source-serif-4", weight: 400, size: 18 },
+  },
+  {
+    display: { fontId: "noto-serif", weight: 700, size: 48 },
+    heading: { fontId: "noto-serif", weight: 600, size: 26 },
+    body: { fontId: "mulish", weight: 400, size: 18 },
+  },
 ];
 
 function generateFontFaceCSS(font: Font) {
@@ -180,26 +241,32 @@ export default function Preview() {
   }
 
   return (
-    <div className="preview mt-6 space-y-4 mx-auto max-w-5xl px-4">
-      <div className="space-y-6 text-center max-w-3xl mx-auto">
-        <Badge variant="outline" className="rounded-full">
-          {`${displayFont?.family} + ${headingFont?.family} + ${bodyFont?.family}`}
-        </Badge>
-        <div className="space-y-4">
-          <h1 className="display text-pretty leading-none">{t("display")}</h1>
-          <h2 className="text-pretty leading-none">{t("heading")}</h2>
-        </div>
-        <p className="text-pretty leading-normal">
-          {t.rich("body", {
-            b: (chunks) => <strong>{chunks}</strong>,
-            i: (chunks) => <em>{chunks}</em>,
-          })}
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button variant="default" size="lg" onClick={() => randomizeFonts()}>
-            <RiSparkling2Fill />
-            {t("randomize")}
-          </Button>
+    <div className="my-6 space-y-4 mx-auto max-w-5xl px-4 flex flex-col items-center">
+      <Badge variant="outline" className="rounded-full">
+        {`${displayFont?.family} + ${headingFont?.family} + ${bodyFont?.family}`}
+      </Badge>
+      <div className="preview">
+        <div className="space-y-6 text-center max-w-3xl mx-auto">
+          <div className="space-y-4">
+            <h1 className="display text-pretty leading-none">{t("display")}</h1>
+            <h2 className="text-pretty leading-none">{t("heading")}</h2>
+          </div>
+          <p className="text-pretty leading-normal">
+            {t.rich("body", {
+              b: (chunks) => <strong>{chunks}</strong>,
+              i: (chunks) => <em>{chunks}</em>,
+            })}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              variant="default"
+              size="lg"
+              onClick={() => randomizeFonts()}
+            >
+              <RiSparkling2Fill />
+              {t("randomize")}
+            </Button>
+          </div>
         </div>
       </div>
     </div>

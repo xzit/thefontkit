@@ -71,7 +71,7 @@ export function FontCombobox({
           <RiExpandUpDownFill className="opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-0">
+      <PopoverContent className="max-w-[270px] p-0">
         <Command>
           <CommandInput
             placeholder={t("placeholder", { label })}
