@@ -114,15 +114,15 @@
 
 @layer base {
   :root {
-    --font-display: "Geist", sans-serif;
+    --font-display: "Bitter", serif;
     --font-display-weight: 700;
     --font-display-size: 48px;
 
-    --font-heading: "Geist", sans-serif;
+    --font-heading: "Inter", sans-serif;
     --font-heading-weight: 600;
     --font-heading-size: 28px;
 
-    --font-body: "Geist", sans-serif;
+    --font-body: "Inter", sans-serif;
     --font-body-weight: 400;
     --font-body-size: 18px;
   }

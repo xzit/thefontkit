@@ -19,7 +19,7 @@ interface FontStore {
 
 export const useSelectedFont = create<FontStore>((set) => ({
   selectedFont: {
-    display: { fontId: "inter", weight: 700, size: 48 },
+    display: { fontId: "bitter", weight: 700, size: 48 },
     heading: { fontId: "inter", weight: 600, size: 28 },
     body: { fontId: "inter", weight: 400, size: 18 },
   },

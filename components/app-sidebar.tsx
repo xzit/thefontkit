@@ -6,8 +6,10 @@ import Editor from "@/app/(editor)/components/editor";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarHeader,
 } from "@/components/ui/sidebar";
+import FontInstall from "@/components/font-install";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const t = useTranslations("AppLayout");
@@ -20,6 +22,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <Editor />
       </SidebarContent>
+      <SidebarFooter>
+        <FontInstall />
+      </SidebarFooter>
     </Sidebar>
   );
 }

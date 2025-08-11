@@ -106,6 +106,7 @@ export function FontEditor({
             max={maxWeight}
             step={10}
             onValueChange={([w]) => onWeightChange(w)}
+            disabled={fontWeights.length === 1}
           />
         ) : (
           // Static font
