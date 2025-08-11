@@ -114,9 +114,17 @@
 
 @layer base {
   :root {
-    --font-display: sans-serif;
-    --font-heading: sans-serif;
-    --font-body: sans-serif;
+    --font-display: "Geist", sans-serif;
+    --font-display-weight: 700;
+    --font-display-size: 48px;
+
+    --font-heading: "Geist", sans-serif;
+    --font-heading-weight: 600;
+    --font-heading-size: 28px;
+
+    --font-body: "Geist", sans-serif;
+    --font-body-weight: 400;
+    --font-body-size: 18px;
   }
   * {
     @apply border-border outline-ring/50;
@@ -127,11 +135,13 @@
   .preview {
     font-family: var(--font-body);
     font-weight: var(--font-body-weight);
+    font-size: var(--font-body-size);
   }
 
   .preview h1.display {
     font-family: var(--font-display);
     font-weight: var(--font-display-weight);
+    font-size: var(--font-display-size);
   }
 
   .preview h1,
@@ -142,5 +152,6 @@
   .preview h6 {
     font-family: var(--font-heading);
     font-weight: var(--font-heading-weight);
+    font-size: var(--font-heading-size);
   }
 }

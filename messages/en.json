@@ -6,6 +6,11 @@
       "description": "The Font Kit"
     }
   },
+  "Response": {
+    "fonts": {
+      "error": "Could not load available font list"
+    }
+  },
   "Dashboard": {
     "title": "Hello world!",
     "header": {
@@ -14,21 +19,23 @@
     },
     "sidebar": {
       "font-family": {
-        "title": "Font Family",
+        "title": "Typography",
         "description": "Customize the font kit",
         "form": {
           "display": "Display",
           "heading": "Heading",
           "body": "Body",
           "weight": "Weight"
-        },
-        "error": "An error occurred while loading the fonts."
+        }
       }
     },
     "preview": {
       "homepage": {
-        "heading": "Lorem ipsum dolor sit amet",
-        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet quam eget mi mollis eleifend quis eget dui. Ut lorem leo, porta eget mi vitae, dignissim tincidunt mauris. Praesent consequat purus."
+        "display": "Find your perfect font",
+        "heading": "The ultimate font playground for designers and creators",
+        "body": "Explore, compare, and preview thousands of fonts — all in one place. <i>No downloads, no hassle</i>. Just pick your style and see your ideas in action, <b>faster than ever</b>.",
+        "customize": "Customize",
+        "randomize": "Randomize"
       }
     }
   },

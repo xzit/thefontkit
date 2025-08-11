@@ -1,13 +1,13 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
 
+import Editor from "@/app/(editor)/components/editor";
+
 import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
-  SidebarFooter,
 } from "@/components/ui/sidebar";
-import Editor from "@/app/(editor)/components/editor";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const t = useTranslations("AppLayout");

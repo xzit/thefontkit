@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { cn } from "@/lib/utils";
+import { useFontStore } from "@/stores/fonts";
+
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -18,6 +20,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+
 import { RiCheckFill, RiExpandUpDownFill } from "@remixicon/react";
 
 export type Font = {
@@ -35,18 +38,23 @@ export type Font = {
 };
 
 export function FontCombobox({
-  fonts,
   label,
   value,
   onChange,
 }: {
-  fonts: Font[];
   label: string;
   value: string;
   onChange: (val: string) => void;
 }) {
-  const [open, setOpen] = useState(false);
   const t = useTranslations("Components.combobox");
+  const { fonts, loading, error, fetchFonts } = useFontStore();
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (fonts.length === 0 && !loading && !error) {
+      fetchFonts();
+    }
+  }, [fonts.length, loading, error, fetchFonts]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

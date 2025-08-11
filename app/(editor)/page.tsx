@@ -1,15 +1,18 @@
+import { useTranslations } from "next-intl";
+import Link from "next/link";
+
+import Preview from "./components/preview";
 import { AppSidebar } from "@/components/app-sidebar";
+import { ModeToggle } from "@/components/theme-toggle";
+
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { ModeToggle } from "@/components/theme-toggle";
-import Preview from "./components/preview";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+
 import { RiHeart3Fill } from "@remixicon/react";
-import { useTranslations } from "next-intl";
 
 export default function Page() {
   const t = useTranslations("Dashboard");

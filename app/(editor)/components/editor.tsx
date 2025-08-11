@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { toast } from "sonner";
 
-import { FontCombobox } from "@/components/font-combobox";
+import { useSelectedFont } from "@/stores/selected-fonts";
+import { useFontStore } from "@/stores/fonts";
+
+import { FontCombobox, type Font } from "@/components/font-combobox";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -17,9 +18,9 @@ import {
   SidebarGroupLabel,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
-import { RiArrowRightSLine, RiFontSansSerif } from "@remixicon/react";
-import { Font } from "@/components/font-combobox";
 import { Slider } from "@/components/ui/slider";
+
+import { RiArrowRightSLine, RiFontSansSerif } from "@remixicon/react";
 
 interface FontSelectorProps {
   label: string;
@@ -28,6 +29,8 @@ interface FontSelectorProps {
   onFontChange: (fontId: string) => void;
   weight: number;
   onWeightChange: (weight: number) => void;
+  size: number;
+  onSizeChange: (size: number) => void;
   font?: Font;
 }
 
@@ -45,13 +48,15 @@ const weightNames: Record<number, string> = {
 
 export function FontEditor({
   label,
-  fonts,
   selectedFontId,
   onFontChange,
   weight,
   onWeightChange,
+  size,
+  onSizeChange,
   font,
 }: FontSelectorProps) {
+  const { fonts } = useFontStore();
   const currentFont = font || fonts.find((f) => f.id === selectedFontId);
 
   const fontWeights = currentFont?.weights ?? [400];
@@ -62,17 +67,26 @@ export function FontEditor({
     fontWeights.findIndex((w) => w === weight),
   );
 
+  function getClosestWeight(weights: number[], target: number) {
+    return weights.reduce((prev, curr) =>
+      Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev,
+    );
+  }
+
   return (
     <div className="space-y-4">
       <div className="space-y-2.5">
         <Label>{label}</Label>
         <FontCombobox
-          fonts={fonts}
           label={label}
           value={selectedFontId}
           onChange={(fontId) => {
+            const newFont = fonts.find((f) => f.id === fontId);
+            const newWeights = newFont?.weights ?? [400];
+            const closestWeight = getClosestWeight(newWeights, weight);
+
             onFontChange(fontId);
-            onWeightChange(fontWeights.length > 1 ? 400 : fontWeights[0]);
+            onWeightChange(closestWeight);
           }}
         />
       </div>
@@ -90,7 +104,7 @@ export function FontEditor({
             value={[weight]}
             min={minWeight}
             max={maxWeight}
-            step={1}
+            step={10}
             onValueChange={([w]) => onWeightChange(w)}
           />
         ) : (
@@ -107,156 +121,33 @@ export function FontEditor({
             disabled={fontWeights.length === 1}
           />
         )}
+        <Label className="flex justify-between">
+          <span>Size</span>
+          <span className="text-xs text-muted-foreground ml-auto">
+            {size}px
+          </span>
+        </Label>
+        <Slider
+          value={[size]}
+          min={12}
+          max={96}
+          step={1}
+          onValueChange={([s]) => onSizeChange(s)}
+        />
       </div>
     </div>
   );
 }
 
-function generateFontFaceCSS(font: Font) {
-  const css: string[] = [];
-
-  if (font.variable) {
-    // Variable fonts: subset, wght & style
-    font.subsets.forEach((subset) => {
-      font.styles.forEach((style) => {
-        const url = `https://cdn.jsdelivr.net/fontsource/fonts/${font.id}:vf@latest/${subset}-wght-${style}.woff2`;
-        css.push(`
-          @font-face {
-            font-family: '${font.family}';
-            font-style: ${style};
-            font-weight: 100 900;
-            font-display: swap;
-            src: url('${url}') format('woff2-variations');
-          }
-        `);
-      });
-    });
-  } else {
-    // Static fonts: subset, weight & style
-    font.subsets.forEach((subset) => {
-      font.weights.forEach((weight) => {
-        font.styles.forEach((style) => {
-          const url = `https://cdn.jsdelivr.net/fontsource/fonts/${font.id}@latest/${subset}-${weight}-${style}.woff2`;
-          css.push(`
-            @font-face {
-              font-family: '${font.family}';
-              font-style: ${style};
-              font-weight: ${weight};
-              font-display: swap;
-              src: url('${url}') format('woff2');
-            }
-          `);
-        });
-      });
-    });
-  }
-
-  return css.join("\n");
-}
-
 export default function Editor() {
   const t = useTranslations("Dashboard.sidebar.font-family");
 
-  const [fonts, setFonts] = useState<Font[]>([]);
+  const { fonts } = useFontStore();
+  const { selectedFont, setSelectedFont } = useSelectedFont();
 
-  const [displayFontId, setDisplayFontId] = useState("inter");
-  const [headingFontId, setHeadingFontId] = useState("inter");
-  const [bodyFontId, setBodyFontId] = useState("inter");
-  const [displayWeight, setDisplayWeight] = useState(400);
-  const [headingWeight, setHeadingWeight] = useState(400);
-  const [bodyWeight, setBodyWeight] = useState(400);
-
-  useEffect(() => {
-    async function fetchFonts() {
-      try {
-        const res = await fetch("/api/fonts");
-        if (!res.ok) throw new Error(t("error"));
-        const data = await res.json();
-        setFonts(data);
-      } catch (err) {
-        toast((err as Error).message);
-      } finally {
-      }
-    }
-
-    fetchFonts();
-  }, []);
-
-  const displayFont = fonts.find((f) => f.id === displayFontId);
-  const headingFont = fonts.find((f) => f.id === headingFontId);
-  const bodyFont = fonts.find((f) => f.id === bodyFontId);
-
-  useEffect(() => {
-    const styleEl = document.createElement("style");
-    styleEl.setAttribute("data-fontsource", "true");
-
-    const allFonts = [displayFont, headingFont, bodyFont]
-      .filter(Boolean)
-      .filter(
-        (font, index, self) =>
-          self.findIndex((f) => f?.id === font?.id) === index,
-      );
-
-    const cssRules = allFonts
-      .map((font) => generateFontFaceCSS(font!))
-      .join("\n");
-
-    styleEl.textContent = cssRules;
-    document.head.appendChild(styleEl);
-
-    return () => {
-      document.head
-        .querySelectorAll("[data-fontsource='true']")
-        .forEach((el) => el.remove());
-    };
-  }, [
-    displayFont,
-    headingFont,
-    bodyFont,
-    displayWeight,
-    headingWeight,
-    bodyWeight,
-  ]);
-
-  useEffect(() => {
-    if (displayFont) {
-      document.documentElement.style.setProperty(
-        "--font-display",
-        `'${displayFont.family}', sans-serif`,
-      );
-      document.documentElement.style.setProperty(
-        "--font-display-weight",
-        displayWeight.toString(),
-      );
-    }
-    if (headingFont) {
-      document.documentElement.style.setProperty(
-        "--font-heading",
-        `'${headingFont.family}', sans-serif`,
-      );
-      document.documentElement.style.setProperty(
-        "--font-heading-weight",
-        headingWeight.toString(),
-      );
-    }
-    if (bodyFont) {
-      document.documentElement.style.setProperty(
-        "--font-body",
-        `'${bodyFont.family}', sans-serif`,
-      );
-      document.documentElement.style.setProperty(
-        "--font-body-weight",
-        bodyWeight.toString(),
-      );
-    }
-  }, [
-    displayFont,
-    headingFont,
-    bodyFont,
-    displayWeight,
-    headingWeight,
-    bodyWeight,
-  ]);
+  const displayFont = fonts.find((f) => f.id === selectedFont.display.fontId);
+  const headingFont = fonts.find((f) => f.id === selectedFont.heading.fontId);
+  const bodyFont = fonts.find((f) => f.id === selectedFont.body.fontId);
 
   return (
     <div className="space-y-4">
@@ -279,30 +170,52 @@ export default function Editor() {
               <FontEditor
                 label={t("form.display")}
                 fonts={fonts}
-                selectedFontId={displayFontId}
-                onFontChange={setDisplayFontId}
-                weight={displayWeight}
-                onWeightChange={setDisplayWeight}
+                selectedFontId={selectedFont.display.fontId}
+                onFontChange={(fontId) =>
+                  setSelectedFont("display", "fontId", fontId)
+                }
+                weight={selectedFont.display.weight}
+                onWeightChange={(weight) =>
+                  setSelectedFont("display", "weight", weight)
+                }
+                size={selectedFont.display.size}
+                onSizeChange={(size) =>
+                  setSelectedFont("display", "size", size)
+                }
                 font={displayFont}
               />
               <Separator />
               <FontEditor
                 label={t("form.heading")}
                 fonts={fonts}
-                selectedFontId={headingFontId}
-                onFontChange={setHeadingFontId}
-                weight={headingWeight}
-                onWeightChange={setHeadingWeight}
+                selectedFontId={selectedFont.heading.fontId}
+                onFontChange={(fontId) =>
+                  setSelectedFont("heading", "fontId", fontId)
+                }
+                weight={selectedFont.heading.weight}
+                onWeightChange={(weight) =>
+                  setSelectedFont("heading", "weight", weight)
+                }
+                size={selectedFont.heading.size}
+                onSizeChange={(size) =>
+                  setSelectedFont("heading", "size", size)
+                }
                 font={headingFont}
               />
               <Separator />
               <FontEditor
                 label={t("form.body")}
                 fonts={fonts}
-                selectedFontId={bodyFontId}
-                onFontChange={setBodyFontId}
-                weight={bodyWeight}
-                onWeightChange={setBodyWeight}
+                selectedFontId={selectedFont.body.fontId}
+                onFontChange={(fontId) =>
+                  setSelectedFont("body", "fontId", fontId)
+                }
+                weight={selectedFont.body.weight}
+                onWeightChange={(weight) =>
+                  setSelectedFont("body", "weight", weight)
+                }
+                size={selectedFont.body.size}
+                onSizeChange={(size) => setSelectedFont("body", "size", size)}
                 font={bodyFont}
               />
             </div>
