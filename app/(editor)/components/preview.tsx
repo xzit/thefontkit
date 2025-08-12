@@ -12,6 +12,12 @@ import { Button } from "@/components/ui/button";
 
 import { RiSparkling2Fill } from "@remixicon/react";
 import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 function generateFontFaceCSS(font: Font) {
   const css: string[] = [];
@@ -146,50 +152,75 @@ export default function Preview() {
 
     setLastIndex(newIndex);
     applyPreset(presets[newIndex]);
+  }
 
-    function applyPreset(preset: (typeof presets)[number]) {
-      (Object.keys(preset) as Array<"display" | "heading" | "body">).forEach(
-        (section) => {
-          Object.entries(preset[section]).forEach(([prop, value]) => {
-            setSelectedFont(
-              section,
-              prop as "fontId" | "weight" | "size",
-              value,
-            );
-          });
-        },
-      );
-    }
+  function applyPreset(preset: (typeof presets)[number]) {
+    (Object.keys(preset) as Array<"display" | "heading" | "body">).forEach(
+      (section) => {
+        Object.entries(preset[section]).forEach(([prop, value]) => {
+          setSelectedFont(section, prop as "fontId" | "weight" | "size", value);
+        });
+      },
+    );
   }
 
   return (
-    <div className="my-6 space-y-4 mx-auto max-w-5xl px-4 flex flex-col items-center">
-      <Badge variant="outline" className="rounded-full">
-        {`${displayFont?.family} + ${headingFont?.family} + ${bodyFont?.family}`}
-      </Badge>
-      <div className="preview">
-        <div className="space-y-6 text-center max-w-3xl mx-auto">
-          <div className="space-y-4">
-            <h1 className="display text-pretty leading-none">{t("display")}</h1>
-            <h2 className="text-pretty leading-none">{t("heading")}</h2>
-          </div>
-          <p className="text-pretty leading-normal">
-            {t.rich("body", {
-              b: (chunks) => <strong>{chunks}</strong>,
-              i: (chunks) => <em>{chunks}</em>,
-            })}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              variant="default"
-              size="lg"
-              onClick={() => randomizeFonts()}
-            >
-              <RiSparkling2Fill />
-              {t("randomize")}
-            </Button>
+    <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-16">
+      <div className="mx-auto my-6 flex max-w-5xl flex-col items-center space-y-4 px-4">
+        <Badge variant="outline" className="rounded-full text-sm">
+          {`${displayFont?.family || "Bitter"} + ${bodyFont?.family || "Inter"}`}
+        </Badge>
+        <div className="preview">
+          <div className="mx-auto max-w-3xl space-y-6 text-center">
+            <div className="space-y-4">
+              <h1 className="display leading-none text-pretty">
+                {t("display")}
+              </h1>
+              <h2 className="leading-none text-pretty">{t("heading")}</h2>
+            </div>
+            <p className="leading-normal text-pretty">
+              {t.rich("body", {
+                b: (chunks) => <strong>{chunks}</strong>,
+                i: (chunks) => <em>{chunks}</em>,
+              })}
+            </p>
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
+              <Button
+                variant="default"
+                size="lg"
+                onClick={() => randomizeFonts()}
+              >
+                <RiSparkling2Fill />
+                {t("randomize")}
+              </Button>
+            </div>
           </div>
         </div>
+      </div>
+      <div className="grid w-full auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {presets.map((preset, index) => {
+          const fontMap = Object.fromEntries(
+            fonts.map((f) => [f.id, f.family]),
+          );
+          return (
+            <Card
+              key={index}
+              onClick={() => applyPreset(preset)}
+              className="hover:bg-accent dark:hover:bg-input/50 cursor-pointer"
+            >
+              <CardHeader>
+                <CardTitle className="font-medium">
+                  {fontMap[preset.display.fontId]} +{" "}
+                  {fontMap[preset.body.fontId]}
+                </CardTitle>
+                <CardDescription className="text-muted-foreground">
+                  Display: {preset.display.weight} • Heading:{" "}
+                  {preset.heading.weight} • Body: {preset.body.weight}
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          );
+        })}
       </div>
     </div>
   );

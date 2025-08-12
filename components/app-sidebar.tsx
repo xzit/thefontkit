@@ -17,7 +17,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar variant="floating" {...props}>
       <SidebarHeader>
-        <div className="text-2xl font-bold p-2">{t("name")}</div>
+        <div className="font-heading flex items-center gap-2.5 p-2 text-3xl font-bold">
+          {t("name")}
+        </div>
       </SidebarHeader>
       <SidebarContent>
         <Editor />

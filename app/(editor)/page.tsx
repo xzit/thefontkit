@@ -20,17 +20,17 @@ export default function Page() {
   return (
     <SidebarProvider>
       <SidebarInset>
-        <header className="bg-background sticky top-0 flex h-16 shrink-0 justify-between items-center gap-2 px-4">
+        <header className="bg-background sticky top-0 flex h-16 shrink-0 items-center justify-between gap-2 px-4">
           <div className="ml-auto flex gap-2">
             <ModeToggle />
             <Button
               variant="outline"
               size="lg"
-              className="rounded-full size-10 sm:w-auto"
+              className="size-10 rounded-full sm:w-auto"
               asChild
             >
               <Link href="https://github.com/sponsors/xzit" target="_blank">
-                <RiHeart3Fill className="text-pink-500" />
+                <RiHeart3Fill className="text-pink-400 dark:text-pink-500" />
                 <span className="sr-only sm:not-sr-only">
                   {t("header.sponsor")}
                 </span>

@@ -1,5 +1,10 @@
 export const presets = [
   {
+    display: { fontId: "bitter", weight: 700, size: 48 },
+    heading: { fontId: "inter", weight: 600, size: 28 },
+    body: { fontId: "inter", weight: 400, size: 18 },
+  },
+  {
     display: { fontId: "sora", weight: 700, size: 48 },
     heading: { fontId: "geist", weight: 600, size: 28 },
     body: { fontId: "geist", weight: 400, size: 18 },
@@ -90,13 +95,13 @@ export const presets = [
     body: { fontId: "raleway", weight: 400, size: 18 },
   },
   {
-    display: { fontId: "merriweather", weight: 400, size: 48 },
+    display: { fontId: "merriweather", weight: 700, size: 48 },
     heading: { fontId: "merriweather-sans", weight: 600, size: 28 },
     body: { fontId: "merriweather-sans", weight: 400, size: 18 },
   },
   {
-    display: { fontId: "open-sans", weight: 400, size: 48 },
-    heading: { fontId: "open sans", weight: 600, size: 28 },
+    display: { fontId: "open-sans", weight: 700, size: 48 },
+    heading: { fontId: "open-sans", weight: 600, size: 28 },
     body: { fontId: "bitter", weight: 400, size: 18 },
   },
 ];

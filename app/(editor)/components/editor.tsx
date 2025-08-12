@@ -94,7 +94,7 @@ export function FontEditor({
       <div className="space-y-4">
         <Label className="flex justify-between">
           <span>Weight</span>
-          <span className="text-xs text-muted-foreground ml-auto">
+          <span className="text-muted-foreground ml-auto text-xs">
             {weightNames[weight] ? `${weightNames[weight]} ${weight}` : weight}
           </span>
         </Label>
@@ -124,7 +124,7 @@ export function FontEditor({
         )}
         <Label className="flex justify-between">
           <span>Size</span>
-          <span className="text-xs text-muted-foreground ml-auto">
+          <span className="text-muted-foreground ml-auto text-xs">
             {size}px
           </span>
         </Label>
@@ -167,7 +167,7 @@ export default function Editor() {
             </CollapsibleTrigger>
           </SidebarGroupLabel>
           <CollapsibleContent>
-            <div className="px-2 flex flex-col gap-4">
+            <div className="flex flex-col gap-4 px-2">
               <FontEditor
                 label={t("form.display")}
                 fonts={fonts}
