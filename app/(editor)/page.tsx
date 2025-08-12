@@ -20,7 +20,7 @@ export default function Page() {
   return (
     <SidebarProvider>
       <SidebarInset>
-        <header className="bg-background sticky top-0 flex h-16 shrink-0 items-center justify-between gap-2 px-4">
+        <header className="bg-background/60 sticky top-0 flex h-16 shrink-0 items-center justify-between gap-2 px-4 backdrop-blur-xs">
           <div className="ml-auto flex gap-2">
             <ModeToggle />
             <Button

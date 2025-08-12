@@ -20,7 +20,12 @@ import {
 } from "@/components/ui/sidebar";
 import { Slider } from "@/components/ui/slider";
 
-import { RiArrowRightSLine, RiFontSansSerif } from "@remixicon/react";
+import {
+  RiArrowRightSLine,
+  RiExternalLinkLine,
+  RiFontSansSerif,
+} from "@remixicon/react";
+import Link from "next/link";
 
 interface FontSelectorProps {
   label: string;
@@ -76,7 +81,18 @@ export function FontEditor({
   return (
     <div className="space-y-4">
       <div className="space-y-2.5">
-        <Label>{label}</Label>
+        <Label className="flex justify-between">
+          <span>{label}</span>
+          <span className="text-muted-foreground ml-auto text-xs">
+            <Link
+              href={`https://fontsource.org/fonts/${currentFont?.id}/install`}
+              target="_blank"
+              className="hover:text-foreground/70 flex items-center gap-1 underline"
+            >
+              {currentFont?.family} <RiExternalLinkLine className="size-3.5" />
+            </Link>
+          </span>
+        </Label>
         <FontCombobox
           label={label}
           value={selectedFontId}
@@ -130,8 +146,8 @@ export function FontEditor({
         </Label>
         <Slider
           value={[size]}
-          min={12}
-          max={96}
+          min={label === "Display" ? 32 : label === "Heading" ? 24 : 8}
+          max={label === "Display" ? 96 : label === "Heading" ? 64 : 32}
           step={1}
           onValueChange={([s]) => onSizeChange(s)}
         />

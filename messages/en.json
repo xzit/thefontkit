@@ -4,6 +4,12 @@
     "seo": {
       "title": "The Font Kit",
       "description": "The Font Kit"
+    },
+    "footer": {
+      "name": "The Font Kit",
+      "all-rights": "All rights reserved.",
+      "privacy": "Privacy Policy",
+      "credits": "Crafted by <link>Xzit</link>"
     }
   },
   "Response": {

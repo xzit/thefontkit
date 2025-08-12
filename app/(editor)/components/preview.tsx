@@ -7,10 +7,9 @@ import { presets } from "@/lib/presets";
 import { useFontStore } from "@/stores/fonts";
 import { useSelectedFont } from "@/stores/selected-fonts";
 
+import Footer from "@/components/footer";
 import { Font } from "@/components/font-combobox";
 import { Button } from "@/components/ui/button";
-
-import { RiSparkling2Fill } from "@remixicon/react";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -18,6 +17,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
+import { RiSparkling2Fill } from "@remixicon/react";
 
 function generateFontFaceCSS(font: Font) {
   const css: string[] = [];
@@ -222,6 +223,7 @@ export default function Preview() {
           );
         })}
       </div>
+      <Footer />
     </div>
   );
 }
