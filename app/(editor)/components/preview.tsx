@@ -13,12 +13,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
+  CardAction,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 
-import { RiSparkling2Fill } from "@remixicon/react";
+import { RiHeart3Line, RiSparkling2Fill } from "@remixicon/react";
+import PresetList from "./preset-list";
 
 function generateFontFaceCSS(font: Font) {
   const css: string[] = [];
@@ -167,11 +169,11 @@ export default function Preview() {
 
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-16">
-      <div className="mx-auto my-6 flex max-w-5xl flex-col items-center space-y-4 px-4">
+      <div className="mx-auto my-6 flex w-full max-w-5xl flex-col items-center space-y-4 px-4">
         <Badge variant="outline" className="rounded-full text-sm">
           {`${displayFont?.family || "Bitter"} + ${bodyFont?.family || "Inter"}`}
         </Badge>
-        <div className="preview">
+        <div className="preview w-full space-y-16">
           <div className="mx-auto max-w-3xl space-y-6 text-center">
             <div className="space-y-4">
               <h1 className="display leading-none text-pretty">
@@ -179,7 +181,7 @@ export default function Preview() {
               </h1>
               <h2 className="leading-none text-pretty">{t("heading")}</h2>
             </div>
-            <p className="leading-normal text-pretty">
+            <p className="text-[1.125em] leading-normal text-pretty">
               {t.rich("body", {
                 b: (chunks) => <strong>{chunks}</strong>,
                 i: (chunks) => <em>{chunks}</em>,
@@ -196,33 +198,23 @@ export default function Preview() {
               </Button>
             </div>
           </div>
+          <div className="mx-auto grid w-full max-w-5xl gap-6 text-pretty sm:grid-cols-3">
+            <div className="flex w-full flex-col items-center gap-2 text-center">
+              <h2>{t("features.one.title")}</h2>
+              <p>{t("features.one.description")}</p>
+            </div>
+            <div className="flex w-full flex-col items-center gap-2 text-center">
+              <h2>{t("features.two.title")}</h2>
+              <p>{t("features.two.description")}</p>
+            </div>
+            <div className="flex w-full flex-col items-center gap-2 text-center">
+              <h2>{t("features.three.title")}</h2>
+              <p>{t("features.three.description")}</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="grid w-full auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {presets.map((preset, index) => {
-          const fontMap = Object.fromEntries(
-            fonts.map((f) => [f.id, f.family]),
-          );
-          return (
-            <Card
-              key={index}
-              onClick={() => applyPreset(preset)}
-              className="hover:bg-accent dark:hover:bg-input/50 cursor-pointer"
-            >
-              <CardHeader>
-                <CardTitle className="font-medium">
-                  {fontMap[preset.display.fontId]} +{" "}
-                  {fontMap[preset.body.fontId]}
-                </CardTitle>
-                <CardDescription className="text-muted-foreground">
-                  Display: {preset.display.weight} • Heading:{" "}
-                  {preset.heading.weight} • Body: {preset.body.weight}
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          );
-        })}
-      </div>
+      <PresetList />
       <Footer />
     </div>
   );

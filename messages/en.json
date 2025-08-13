@@ -24,7 +24,7 @@
       "sponsor": "Sponsor"
     },
     "sidebar": {
-      "font-family": {
+      "typography": {
         "title": "Typography",
         "description": "Customize the font kit",
         "form": {
@@ -32,6 +32,38 @@
           "heading": "Heading",
           "body": "Body",
           "weight": "Weight"
+        }
+      },
+      "install": {
+        "title": "Install Your Font Kit",
+        "description": "To install fonts from Fontsource, follow the steps below:",
+        "trigger": "Install",
+        "docs": "Documentation",
+        "install": {
+          "title": "Install",
+          "steps": {
+            "one": {
+              "title": "1. Install the Packages",
+              "description": "Use your preferred package manager to install the font package."
+            },
+            "two": {
+              "title": "2. Import the Fonts",
+              "description": "Import the font package using the package name."
+            },
+            "three": {
+              "title": "3. Add the CSS",
+              "description": "Now, you can add it into your CSS stylesheets."
+            }
+          }
+        },
+        "cdn": {
+          "title": "CDN",
+          "steps": {
+            "one": {
+              "title": "1. Add the CSS",
+              "description": "Import this CSS into your CSS stylesheets."
+            }
+          }
         }
       }
     },
@@ -41,7 +73,21 @@
         "heading": "The ultimate font playground for designers and creators",
         "body": "Explore, compare, and preview thousands of fonts — all in one place. <i>No downloads, no hassle</i>. Just pick your style and see your ideas in action, <b>faster than ever</b>.",
         "customize": "Customize",
-        "randomize": "Randomize"
+        "randomize": "Randomize",
+        "features": {
+          "one": {
+            "title": "Open Source Fonts",
+            "description": "Browse a curated collection of open-source fonts ready for any project. Powered by Fontsource, you get access to reliable, well-maintained font files without licensing headaches."
+          },
+          "two": {
+            "title": "Self-Hosting Install",
+            "description": "Easily install fonts locally with a single command. No external calls, no delays — just the speed and control of hosting your own fonts, directly from Fontsource packages."
+          },
+          "three": {
+            "title": "Live Preview Playground",
+            "description": "Test and compare fonts in real time before adding them to your project. Adjust sizes, weights, and styles instantly, so you can make the perfect choice without guesswork."
+          }
+        }
       }
     }
   },
@@ -54,6 +100,10 @@
     "combobox": {
       "placeholder": "Select a {label} font...",
       "empty": "No font found."
+    },
+    "copyable-pre": {
+      "copy": "Copy",
+      "copied": "Copied"
     }
   }
 }

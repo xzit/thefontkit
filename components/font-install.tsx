@@ -1,11 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { RiGlobalLine, RiTerminalFill } from "@remixicon/react";
+import { useTranslations } from "next-intl";
 
-import { useFontStore } from "@/stores/fonts";
+import { Font, useFontStore } from "@/stores/fonts";
 import { useSelectedFont } from "@/stores/selected-fonts";
 
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -14,8 +14,74 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import {
+  RiDownloadLine,
+  RiExternalLinkLine,
+  RiGlobalLine,
+  RiTerminalLine,
+} from "@remixicon/react";
+import { CopyablePre } from "./copyable-pre";
+import Link from "next/link";
+
+function generateFontFaceCSS(font: Font) {
+  const cssBlocks: string[] = [];
+  const baseId = font.variable ? `${font.id}:vf` : font.id;
+  const familyName = font.family + (font.variable ? " Variable" : "");
+  const category = font.category || "sans-serif";
+
+  // Normal style
+  if (font.variable) {
+    // Variable font
+    cssBlocks.push(`@font-face {
+  font-family: '${familyName}';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/${baseId}@latest/latin-wght-normal.woff2) format('woff2-variations');
+}`);
+  } else {
+    // Static, puede tener varios pesos, genera uno por peso
+    for (const weight of font.weights) {
+      cssBlocks.push(`@font-face {
+  font-family: '${familyName}';
+  font-style: normal;
+  font-display: swap;
+  font-weight: ${weight};
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/${baseId}@latest/latin-${weight}-normal.woff2) format('woff2');
+}`);
+    }
+  }
+
+  // Italic style (si existe)
+  if (font.styles.includes("italic")) {
+    if (font.variable) {
+      cssBlocks.push(`@font-face {
+  font-family: '${familyName}';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/${baseId}@latest/latin-wght-italic.woff2) format('woff2-variations');
+}`);
+    } else {
+      for (const weight of font.weights) {
+        cssBlocks.push(`@font-face {
+  font-family: '${familyName}';
+  font-style: italic;
+  font-display: swap;
+  font-weight: ${weight};
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/${baseId}@latest/latin-${weight}-italic.woff2) format('woff2');
+}`);
+      }
+    }
+  }
+
+  return cssBlocks.join("\n\n");
+}
 
 export default function FontInstall() {
+  const t = useTranslations("Dashboard.sidebar.install");
   const { fonts } = useFontStore();
   const { selectedFont } = useSelectedFont();
 
@@ -32,58 +98,131 @@ export default function FontInstall() {
       <Dialog>
         <DialogTrigger asChild>
           <Button>
-            <RiTerminalFill />
-            Install
+            <RiDownloadLine />
+            {t("trigger")}
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-3xl">
           <DialogHeader>
-            <DialogTitle>Install Font</DialogTitle>
-            <DialogDescription>
-              Install the font to your system
-            </DialogDescription>
+            <DialogTitle>{t("title")}</DialogTitle>
+            <DialogDescription>{t("description")}</DialogDescription>
           </DialogHeader>
-          <div className="flex flex-col gap-2">
-            <pre>
-              {uniqueFontIds
-                .map((id) => `npm install @fontsource/${id}`)
-                .join("\n")}
-            </pre>
-            <pre>
-              {uniqueFontIds
-                .map((id) => `import "@fontsource/${id}"`)
-                .join("\n")}
-            </pre>
-            <pre>
-              {uniqueFontIds
-                .map((id) => {
-                  const font = fonts.find((f) => f.id === id);
-                  if (!font) return "";
+          <div className="-mx-6 -mb-6 max-h-[500px] space-y-6 overflow-y-auto px-6 pb-6">
+            <Tabs defaultValue="install" className="gap-0">
+              <div className="bg-background sticky top-0 z-10 flex flex-col gap-4 pb-4 sm:flex-row sm:justify-between">
+                <TabsList className="w-full sm:w-auto">
+                  <TabsTrigger value="install">
+                    <RiTerminalLine />
+                    {t("install.title")}
+                  </TabsTrigger>
+                  <TabsTrigger value="cdn">
+                    <RiGlobalLine />
+                    {t("cdn.title")}
+                  </TabsTrigger>
+                </TabsList>
+                <div>
+                  <Button className="w-full sm:w-auto" asChild>
+                    <Link
+                      href="https://fontsource.org/docs/getting-started/install"
+                      target="_blank"
+                    >
+                      {t("docs")}
+                      <RiExternalLinkLine className="size-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+              <TabsContent value="install">
+                <div className="flex flex-col space-y-4">
+                  <div>
+                    <h3 className="font-semibold">
+                      {t("install.steps.one.title")}
+                    </h3>
+                    <p>{t("install.steps.one.description")}</p>
+                  </div>
+                  <CopyablePre>
+                    {uniqueFontIds
+                      .map((id) => {
+                        const font = fonts.find((f) => f.id === id);
+                        if (!font) return `npm install @fontsource/${id}`;
 
-                  const family = font.family;
-                  const category = font.category || "sans-serif";
+                        const pkgPrefix = font.variable
+                          ? "@fontsource-variable"
+                          : "@fontsource";
+                        return `npm install ${pkgPrefix}/${id}`;
+                      })
+                      .join("\n")}
+                  </CopyablePre>
+                  <div>
+                    <h3 className="font-semibold">
+                      {t("install.steps.two.title")}
+                    </h3>
+                    <p>{t("install.steps.two.description")}</p>
+                  </div>
+                  <CopyablePre>
+                    {uniqueFontIds
+                      .map((id) => {
+                        const font = fonts.find((f) => f.id === id);
+                        if (!font) return `import "@fontsource/${id}"`;
 
-                  return `body {
+                        const pkgPrefix = font.variable
+                          ? "@fontsource-variable"
+                          : "@fontsource";
+                        return `import "${pkgPrefix}/${id}"`;
+                      })
+                      .join("\n")}
+                  </CopyablePre>
+                  <div>
+                    <h3 className="font-semibold">
+                      {t("install.steps.three.title")}
+                    </h3>
+                    <p>{t("install.steps.three.description")}</p>
+                  </div>
+                  <CopyablePre>
+                    {(["display", "heading", "body"] as const)
+                      .map((role) => {
+                        const fontId = selectedFont[role]?.fontId;
+                        if (!fontId) return "";
+
+                        const font = fonts.find((f) => f.id === fontId);
+                        if (!font) return "";
+
+                        const family =
+                          font.family + (font.variable ? " Variable" : "");
+                        const category = font.category || "sans-serif";
+
+                        return `${role !== "body" ? "." : ""}${role} {
   font-family: '${family}', ${category};
 }`;
-                })
-                .join("\n")}
-            </pre>
+                      })
+                      .filter(Boolean)
+                      .join("\n\n")}
+                  </CopyablePre>
+                </div>
+              </TabsContent>
+              <TabsContent value="cdn">
+                <div className="flex flex-col space-y-4">
+                  <div>
+                    <h3 className="font-semibold">
+                      {t("cdn.steps.one.title")}
+                    </h3>
+                    <p>{t("cdn.steps.one.description")}</p>
+                  </div>
+                  <CopyablePre>
+                    {uniqueFontIds
+                      .map((id) => {
+                        const font = fonts.find((f) => f.id === id);
+                        if (!font) return "";
+
+                        return generateFontFaceCSS(font);
+                      })
+                      .filter(Boolean)
+                      .join("\n\n")}
+                  </CopyablePre>
+                </div>
+              </TabsContent>
+            </Tabs>
           </div>
-        </DialogContent>
-      </Dialog>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button>
-            <RiGlobalLine />
-            CDN
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-3xl">
-          <DialogHeader>
-            <DialogTitle>CDN Font</DialogTitle>
-            <DialogDescription>Use the font from a CDN</DialogDescription>
-          </DialogHeader>
         </DialogContent>
       </Dialog>
     </div>

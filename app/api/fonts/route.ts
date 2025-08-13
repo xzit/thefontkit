@@ -5,7 +5,7 @@ export async function GET() {
     locale: "en",
     namespace: "Response.fonts",
   });
-  const res = await fetch("https://api.fontsource.org/v1/fonts", {
+  const res = await fetch("https://api.fontsource.org/v1/fonts?type=google", {
     next: { revalidate: 60 * 60 * 24 },
   });
 

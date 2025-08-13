@@ -157,7 +157,7 @@ export function FontEditor({
 }
 
 export default function Editor() {
-  const t = useTranslations("Dashboard.sidebar.font-family");
+  const t = useTranslations("Dashboard.sidebar.typography");
 
   const { fonts } = useFontStore();
   const { selectedFont, setSelectedFont } = useSelectedFont();
