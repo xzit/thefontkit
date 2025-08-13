@@ -29,7 +29,6 @@ function generateFontFaceCSS(font: Font) {
   const cssBlocks: string[] = [];
   const baseId = font.variable ? `${font.id}:vf` : font.id;
   const familyName = font.family + (font.variable ? " Variable" : "");
-  const category = font.category || "sans-serif";
 
   // Normal style
   if (font.variable) {

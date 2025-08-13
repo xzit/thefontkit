@@ -46,13 +46,14 @@ function Skeleton({
       {...props}
     >
       {isElement ? (
-        React.cloneElement(children as React.ReactElement<any>, {
+        React.cloneElement(children as React.ReactElement<HTMLElement>, {
           className: cn(
             "text-transparent select-none pointer-events-none caret-transparent border-transparent",
-            (children as React.ReactElement<any>).props.className,
+            (children as React.ReactElement<{ className?: string }>).props
+              .className ?? "",
           ),
           tabIndex: -1,
-          "aria-hidden": true,
+          ariaHidden: "true",
         })
       ) : children ? (
         <span className="invisible">{children}</span>

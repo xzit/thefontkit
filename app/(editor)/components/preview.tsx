@@ -10,15 +10,8 @@ import { useSelectedFont } from "@/stores/selected-fonts";
 import { Font } from "@/components/font-combobox";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardAction,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 
-import { RiHeart3Line, RiSparkling2Fill } from "@remixicon/react";
+import { RiSparkling2Fill } from "@remixicon/react";
 import PresetList from "./preset-list";
 
 function generateFontFaceCSS(font: Font) {

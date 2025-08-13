@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { RiCheckLine, RiClipboardLine } from "@remixicon/react";
@@ -10,7 +9,6 @@ interface CopyablePreProps {
 }
 
 export function CopyablePre({ children, className }: CopyablePreProps) {
-  const t = useTranslations("Components.copyable-pre");
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {

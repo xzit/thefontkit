@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { presets } from "@/lib/presets";
@@ -23,7 +23,7 @@ import { Skeleton } from "@/components/skeleton";
 export default function PresetList() {
   const t = useTranslations("Dashboard.presets");
 
-  const { fonts, hasFetched } = useFontStore();
+  const { fonts } = useFontStore();
   const { setSelectedFont } = useSelectedFont();
   const { addFavorite, removeFavorite, isFavorite } = useFavoritesFonts();
 
