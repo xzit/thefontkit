@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { RiHeart3Fill } from "@remixicon/react";
+import Footer from "@/components/footer";
 
 export default function Page() {
   const t = useTranslations("Dashboard");
@@ -39,8 +40,9 @@ export default function Page() {
             <SidebarTrigger className="-mr-1" />
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4">
+        <div className="flex flex-1 flex-col gap-16 p-4">
           <Preview />
+          <Footer />
         </div>
       </SidebarInset>
       <AppSidebar side="right" />

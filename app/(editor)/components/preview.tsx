@@ -7,7 +7,6 @@ import { presets } from "@/lib/presets";
 import { useFontStore } from "@/stores/fonts";
 import { useSelectedFont } from "@/stores/selected-fonts";
 
-import Footer from "@/components/footer";
 import { Font } from "@/components/font-combobox";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -215,7 +214,6 @@ export default function Preview() {
         </div>
       </div>
       <PresetList />
-      <Footer />
     </div>
   );
 }
