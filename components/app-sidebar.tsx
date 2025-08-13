@@ -1,4 +1,5 @@
 import * as React from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import Editor from "@/app/(editor)/components/editor";
@@ -10,7 +11,6 @@ import {
   SidebarHeader,
 } from "@/components/ui/sidebar";
 import FontInstall from "@/components/font-install";
-import { RiSparkling2Fill } from "@remixicon/react";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const t = useTranslations("AppLayout");
@@ -19,8 +19,24 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar variant="floating" {...props}>
       <SidebarHeader>
         <div className="font-heading flex items-center gap-2.5 p-2 text-3xl font-bold">
-          <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-            <RiSparkling2Fill />
+          <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-10 items-center justify-center rounded-lg">
+            <svg
+              width={24}
+              height={24}
+              fill="currentColor"
+              clipRule="evenodd"
+              fillRule="evenodd"
+              strokeLinejoin="round"
+              strokeMiterlimit="2"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m0 .18.019-.12h.043c.027 0 .049-.007.066-.021s.028-.033.031-.058l.045-.281h-.152l.022-.135h.152l.02-.125c.005-.034.018-.064.038-.09.02-.025.045-.045.076-.059s.065-.021.103-.021h.137l-.021.13h-.132c-.013 0-.025.004-.034.012-.009.009-.015.02-.018.033l-.019.12h.195l-.022.135h-.195l-.046.286c-.01.06-.038.107-.084.142-.047.035-.105.052-.176.052z"
+                fillRule="nonzero"
+                transform="matrix(26.66664 0 0 26.3736 4.000000285 19.25276643)"
+              />
+            </svg>
           </div>
           {t("name")}
         </div>

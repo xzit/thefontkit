@@ -89,6 +89,12 @@
           }
         }
       }
+    },
+    "presets": {
+      "display": "Display",
+      "heading": "Heading",
+      "body": "Body",
+      "load": "Load more"
     }
   },
   "Components": {
