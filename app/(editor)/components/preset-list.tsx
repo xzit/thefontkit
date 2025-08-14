@@ -43,6 +43,7 @@ export default function PresetList() {
         });
       },
     );
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   return (
