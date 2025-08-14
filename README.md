@@ -5,8 +5,6 @@ The Font Kit is a simple and intuitive tool for exploring, pairing, and previewi
 This project uses [Fontsource](https://fontsource.org) to provide reliable, self-hosted Google Fonts in a developer-friendly way.  
 A huge thank you to the Fontsource team and contributors for their amazing open-source work.
 
----
-
 ## 🚀 Getting Started (Development)
 
 We use **[pnpm](https://pnpm.io)** as our package manager.
@@ -26,8 +24,6 @@ pnpm dev
 ```
 
 The app will be running at [http://localhost:3000](http://localhost:3000) by default.
-
----
 
 ## 🤝 How to Contribute
 
@@ -54,8 +50,6 @@ git push origin feature/your-feature-name
 ```
 
 6. Open a Pull Request to the main branch of this repository.
-
----
 
 ## 📜 License
 
