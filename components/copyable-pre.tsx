@@ -31,13 +31,13 @@ export function CopyablePre({ children, className }: CopyablePreProps) {
   }, [copied]);
 
   return (
-    <div className={cn("group relative", className)}>
+    <div className={cn("relative", className)}>
       <pre className="overflow-auto text-sm">{children}</pre>
       <Button
         variant="ghost"
         size="icon"
         onClick={handleCopy}
-        className="absolute top-2 right-2 flex size-7 items-center justify-center rounded text-xs opacity-0 transition-opacity group-hover:opacity-100"
+        className="absolute top-2 right-2 flex size-7 items-center justify-center rounded text-xs"
         aria-label="Copy code"
         type="button"
       >

@@ -1,10 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 import { Font, useFontStore } from "@/stores/fonts";
 import { useSelectedFont } from "@/stores/selected-fonts";
+import { useFavoritesFonts } from "@/stores/favorites-fonts";
 
+import { CopyablePre } from "@/components/copyable-pre";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -20,10 +23,10 @@ import {
   RiDownloadLine,
   RiExternalLinkLine,
   RiGlobalLine,
+  RiHeart3Fill,
+  RiHeart3Line,
   RiTerminalLine,
 } from "@remixicon/react";
-import { CopyablePre } from "./copyable-pre";
-import Link from "next/link";
 
 function generateFontFaceCSS(font: Font) {
   const cssBlocks: string[] = [];
@@ -83,6 +86,7 @@ export default function FontInstall() {
   const t = useTranslations("Dashboard.sidebar.install");
   const { fonts } = useFontStore();
   const { selectedFont } = useSelectedFont();
+  const { addFavorite, removeFavorite, isFavorite } = useFavoritesFonts();
 
   const fontIds = [
     selectedFont.display?.fontId,
@@ -94,6 +98,29 @@ export default function FontInstall() {
 
   return (
     <div className="flex flex-col gap-2">
+      <Button
+        variant="outline"
+        onClick={() =>
+          isFavorite(selectedFont)
+            ? removeFavorite(selectedFont)
+            : addFavorite(selectedFont)
+        }
+      >
+        {fonts.length > 0 ? (
+          isFavorite(selectedFont) ? (
+            <RiHeart3Fill />
+          ) : (
+            <RiHeart3Line />
+          )
+        ) : (
+          <RiHeart3Line />
+        )}
+        {fonts.length > 0
+          ? isFavorite(selectedFont)
+            ? t("unsave")
+            : t("save")
+          : t("save")}
+      </Button>
       <Dialog>
         <DialogTrigger asChild>
           <Button>

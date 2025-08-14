@@ -2,8 +2,8 @@
   "AppLayout": {
     "name": "The Font Kit",
     "seo": {
-      "title": "The Font Kit",
-      "description": "The Font Kit"
+      "title": "The Ultimate Font Pairing Tool for Web Designers",
+      "description": "Discover The Font Kit — the ultimate font pairing playground for web designers. Find the perfect Google Fonts combinations to inspire your next website design."
     },
     "footer": {
       "name": "The Font Kit",
@@ -37,8 +37,10 @@
       "install": {
         "title": "Install Your Font Kit",
         "description": "To install fonts from Fontsource, follow the steps below:",
-        "trigger": "Install",
+        "trigger": "Install fonts",
         "docs": "Documentation",
+        "save": "Save as favorite",
+        "unsave": "Saved as favorite",
         "install": {
           "title": "Install",
           "steps": {
@@ -91,6 +93,8 @@
       }
     },
     "presets": {
+      "favorites": "Your favorites",
+      "presets": "Explore pairings",
       "display": "Display",
       "heading": "Heading",
       "body": "Body",

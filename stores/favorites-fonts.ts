@@ -34,7 +34,13 @@ export const useFavoritesFonts = create<FavoritesState>()(
           (f) =>
             f.display.fontId === preset.display.fontId &&
             f.heading.fontId === preset.heading.fontId &&
-            f.body.fontId === preset.body.fontId,
+            f.body.fontId === preset.body.fontId &&
+            f.display.weight === preset.display.weight &&
+            f.heading.weight === preset.heading.weight &&
+            f.body.weight === preset.body.weight &&
+            f.display.size === preset.display.size &&
+            f.heading.size === preset.heading.size &&
+            f.body.size === preset.body.size,
         );
 
         if (!exists) {
@@ -49,7 +55,13 @@ export const useFavoritesFonts = create<FavoritesState>()(
               !(
                 f.display.fontId === preset.display.fontId &&
                 f.heading.fontId === preset.heading.fontId &&
-                f.body.fontId === preset.body.fontId
+                f.body.fontId === preset.body.fontId &&
+                f.display.weight === preset.display.weight &&
+                f.heading.weight === preset.heading.weight &&
+                f.body.weight === preset.body.weight &&
+                f.display.size === preset.display.size &&
+                f.heading.size === preset.heading.size &&
+                f.body.size === preset.body.size
               ),
           ),
         });
@@ -60,7 +72,13 @@ export const useFavoritesFonts = create<FavoritesState>()(
           (f) =>
             f.display.fontId === preset.display.fontId &&
             f.heading.fontId === preset.heading.fontId &&
-            f.body.fontId === preset.body.fontId,
+            f.body.fontId === preset.body.fontId &&
+            f.display.weight === preset.display.weight &&
+            f.heading.weight === preset.heading.weight &&
+            f.body.weight === preset.body.weight &&
+            f.display.size === preset.display.size &&
+            f.heading.size === preset.heading.size &&
+            f.body.size === preset.body.size,
         );
       },
     }),
