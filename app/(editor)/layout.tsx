@@ -1,9 +1,10 @@
-import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import { AppSidebar } from "@/components/app-sidebar";
 import { ModeToggle } from "@/components/theme-toggle";
 
+import Footer from "@/components/footer";
 import {
   SidebarInset,
   SidebarProvider,
@@ -12,7 +13,6 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { RiGithubFill, RiHeart3Fill } from "@remixicon/react";
-import Footer from "@/components/footer";
 
 export default function DashboardLayout({
   children,

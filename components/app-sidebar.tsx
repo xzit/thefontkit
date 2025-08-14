@@ -2,7 +2,7 @@ import * as React from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-import Editor from "@/app/(editor)/components/editor";
+import Editor from "@/components/editor";
 
 import {
   Sidebar,
@@ -18,7 +18,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar variant="floating" {...props}>
       <SidebarHeader>
-        <div className="font-heading flex items-center gap-2.5 p-2 text-2xl font-bold">
+        <div className="flex items-center gap-2.5 p-2 font-serif text-2xl font-bold">
           <Link href="/">
             <div className="bg-sidebar-primary text-sidebar-primary-foreground dark:text-sidebar flex aspect-square size-10 items-center justify-center rounded-lg">
               <svg
@@ -44,7 +44,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <Link href="/">
               <span>{t("name")}</span>
             </Link>
-            <span className="text-xs font-normal">v1.0.1</span>
+            <span className="font-sans text-xs font-normal">v1.0.1</span>
           </div>
         </div>
       </SidebarHeader>

@@ -1,7 +1,7 @@
 export const presets = [
   {
     display: { fontId: "bitter", weight: 700, size: 48 },
-    heading: { fontId: "bitter", weight: 600, size: 24 },
+    heading: { fontId: "inter", weight: 600, size: 24 },
     body: { fontId: "inter", weight: 400, size: 16 },
   },
   {

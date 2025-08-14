@@ -1,7 +1,7 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Bitter, Inter } from "next/font/google";
+import { Bitter, Inter, JetBrains_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 
@@ -9,14 +9,22 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Script from "next/script";
 
-const inter = Inter({
-  variable: "--font-inter",
+const sans = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
+  style: ["normal", "italic"],
 });
 
-const bitter = Bitter({
-  variable: "--font-bitter",
+const serif = Bitter({
+  variable: "--font-serif",
   subsets: ["latin"],
+  style: ["normal", "italic"],
+});
+
+const mono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
 });
 
 export async function generateMetadata(props: {
@@ -46,7 +54,9 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${inter.variable} ${bitter.variable} antialiased`}>
+      <body
+        className={`${sans.variable} ${serif.variable} ${mono.variable} antialiased`}
+      >
         <Script
           src="https://insights.emprende.one/script.js"
           data-website-id="77373d19-3ca1-4beb-8289-b4eaca5050f8"

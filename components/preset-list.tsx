@@ -48,66 +48,66 @@ export default function PresetList() {
 
   return (
     <div className="flex w-full flex-col gap-8">
-      <div className="flex flex-col gap-4">
-        {favorites.length > 0 && (
+      {favorites.length > 0 && (
+        <div className="flex flex-col gap-4">
           <h4 className="text-lg font-semibold">{t("favorites")}</h4>
-        )}
-        <div className="grid w-full auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {favorites.map((preset, index) => {
-            const fontMap = Object.fromEntries(
-              fonts.map((f) => [f.id, f.family]),
-            );
-            const fav = isFavorite(preset);
-            return (
-              <Card
-                key={index}
-                onClick={() => applyPreset(preset)}
-                className="hover:bg-accent dark:hover:bg-input/50 cursor-pointer"
-              >
-                <CardHeader>
-                  <CardTitle className="line-clamp-1">
-                    <Skeleton loading={!fonts.length}>
-                      {fonts.length > 0
-                        ? fontMap[preset.display.fontId] +
-                          " + " +
-                          fontMap[preset.body.fontId]
-                        : "Loading..."}
-                    </Skeleton>
-                  </CardTitle>
-                  <CardDescription className="col-span-2 line-clamp-1">
-                    <Skeleton loading={!fonts.length}>
-                      {t("display")}: {preset.display.weight} • {t("heading")}:{" "}
-                      {preset.heading.weight} • {t("body")}:{" "}
-                      {preset.body.weight}
-                    </Skeleton>
-                  </CardDescription>
-                  <CardAction className="-mt-4 -mr-4">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="size-8"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        fav ? removeFavorite(preset) : addFavorite(preset);
-                      }}
-                    >
-                      {fonts.length > 0 ? (
-                        fav ? (
-                          <RiHeart3Fill />
+          <div className="grid w-full auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {favorites.map((preset, index) => {
+              const fontMap = Object.fromEntries(
+                fonts.map((f) => [f.id, f.family]),
+              );
+              const fav = isFavorite(preset);
+              return (
+                <Card
+                  key={index}
+                  onClick={() => applyPreset(preset)}
+                  className="hover:bg-accent dark:hover:bg-input/50 cursor-pointer"
+                >
+                  <CardHeader>
+                    <CardTitle className="line-clamp-1">
+                      <Skeleton loading={!fonts.length}>
+                        {fonts.length > 0
+                          ? fontMap[preset.display.fontId] +
+                            " + " +
+                            fontMap[preset.body.fontId]
+                          : "Loading..."}
+                      </Skeleton>
+                    </CardTitle>
+                    <CardDescription className="col-span-2 line-clamp-1">
+                      <Skeleton loading={!fonts.length}>
+                        {t("display")}: {preset.display.weight} • {t("heading")}
+                        : {preset.heading.weight} • {t("body")}:{" "}
+                        {preset.body.weight}
+                      </Skeleton>
+                    </CardDescription>
+                    <CardAction className="-mt-4 -mr-4">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="size-8"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          fav ? removeFavorite(preset) : addFavorite(preset);
+                        }}
+                      >
+                        {fonts.length > 0 ? (
+                          fav ? (
+                            <RiHeart3Fill />
+                          ) : (
+                            <RiHeart3Line />
+                          )
                         ) : (
                           <RiHeart3Line />
-                        )
-                      ) : (
-                        <RiHeart3Line />
-                      )}
-                    </Button>
-                  </CardAction>
-                </CardHeader>
-              </Card>
-            );
-          })}
+                        )}
+                      </Button>
+                    </CardAction>
+                  </CardHeader>
+                </Card>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
       <div className="flex flex-col gap-4">
         <h4 className="text-lg font-semibold">{t("presets")}</h4>
         <div className="grid w-full auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -126,9 +126,14 @@ export default function PresetList() {
                   <CardTitle className="line-clamp-1">
                     <Skeleton loading={!fonts.length}>
                       {fonts.length > 0
-                        ? fontMap[preset.display.fontId] +
-                          " + " +
-                          fontMap[preset.body.fontId]
+                        ? [
+                            fontMap[preset.display.fontId],
+                            fontMap[preset.heading.fontId],
+                            fontMap[preset.body.fontId],
+                          ]
+                            .filter(Boolean)
+                            .filter((v, i, arr) => arr.indexOf(v) === i)
+                            .join(" + ")
                         : "Loading..."}
                     </Skeleton>
                   </CardTitle>
