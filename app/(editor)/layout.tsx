@@ -1,7 +1,6 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
-import Preview from "./components/preview";
 import { AppSidebar } from "@/components/app-sidebar";
 import { ModeToggle } from "@/components/theme-toggle";
 

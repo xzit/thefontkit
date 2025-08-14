@@ -1,17 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 
-import { presets } from "@/lib/presets";
 import { useFontStore } from "@/stores/fonts";
 import { useSelectedFont } from "@/stores/selected-fonts";
 
 import { Font } from "@/components/font-combobox";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-
-import { RiSparkling2Fill } from "@remixicon/react";
 
 function generateFontFaceCSS(font: Font) {
   const css: string[] = [];
@@ -56,11 +50,8 @@ function generateFontFaceCSS(font: Font) {
 }
 
 export default function Preview() {
-  const t = useTranslations("Dashboard.preview.homepage");
-
   const { fonts } = useFontStore();
-  const { selectedFont, setSelectedFont } = useSelectedFont();
-  const [lastIndex, setLastIndex] = useState<number | null>(null);
+  const { selectedFont } = useSelectedFont();
 
   const displayFont = fonts.find((f) => f.id === selectedFont.display.fontId);
   const headingFont = fonts.find((f) => f.id === selectedFont.heading.fontId);
@@ -135,28 +126,6 @@ export default function Preview() {
       );
     }
   }, [selectedFont]);
-
-  function randomizeFonts() {
-    if (presets.length === 0) return;
-
-    let newIndex: number;
-    do {
-      newIndex = Math.floor(Math.random() * presets.length);
-    } while (newIndex === lastIndex && presets.length > 1);
-
-    setLastIndex(newIndex);
-    applyPreset(presets[newIndex]);
-  }
-
-  function applyPreset(preset: (typeof presets)[number]) {
-    (Object.keys(preset) as Array<"display" | "heading" | "body">).forEach(
-      (section) => {
-        Object.entries(preset[section]).forEach(([prop, value]) => {
-          setSelectedFont(section, prop as "fontId" | "weight" | "size", value);
-        });
-      },
-    );
-  }
 
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-16">
