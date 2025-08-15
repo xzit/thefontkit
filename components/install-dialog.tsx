@@ -122,20 +122,18 @@ export default function FontInstall() {
           : t("save")}
       </Button>
       <Dialog>
-        <DialogTrigger asChild>
-          <Button>
-            <RiDownloadLine />
-            {t("trigger")}
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-3xl">
-          <DialogHeader>
-            <DialogTitle>{t("title")}</DialogTitle>
-            <DialogDescription>{t("description")}</DialogDescription>
-          </DialogHeader>
-          <div className="-mx-6 -mb-6 max-h-[500px] space-y-6 overflow-y-auto px-6 pb-6">
-            <Tabs defaultValue="install" className="gap-0">
-              <div className="bg-background sticky top-0 z-10 flex flex-col gap-4 pb-4 sm:flex-row sm:justify-between">
+        <Tabs defaultValue="install" className="gap-0">
+          <DialogTrigger asChild>
+            <Button>
+              <RiDownloadLine />
+              {t("trigger")}
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-3xl">
+            <DialogHeader>
+              <DialogTitle>{t("title")}</DialogTitle>
+              <DialogDescription>{t("description")}</DialogDescription>
+              <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
                 <TabsList className="w-full sm:w-auto">
                   <TabsTrigger value="install">
                     <RiTerminalLine />
@@ -158,6 +156,8 @@ export default function FontInstall() {
                   </Button>
                 </div>
               </div>
+            </DialogHeader>
+            <div className="-mx-6 -mb-6 max-h-[500px] overflow-y-auto px-6 pb-6">
               <TabsContent value="install">
                 <div className="flex flex-col space-y-4">
                   <div>
@@ -247,9 +247,9 @@ export default function FontInstall() {
                   </CopyablePre>
                 </div>
               </TabsContent>
-            </Tabs>
-          </div>
-        </DialogContent>
+            </div>
+          </DialogContent>
+        </Tabs>
       </Dialog>
     </div>
   );

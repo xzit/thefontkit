@@ -2,6 +2,7 @@ import * as React from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
+import FontInstall from "@/components/install-dialog";
 import Editor from "@/components/editor";
 
 import {
@@ -10,7 +11,6 @@ import {
   SidebarFooter,
   SidebarHeader,
 } from "@/components/ui/sidebar";
-import FontInstall from "@/components/font-install";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const t = useTranslations("AppLayout");

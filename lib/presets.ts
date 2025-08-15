@@ -26,7 +26,7 @@ export const presets = [
   },
   {
     display: { fontId: "libre-baskerville", weight: 700, size: 48 },
-    heading: { fontId: "libre-franklin", weight: 700, size: 24 },
+    heading: { fontId: "libre-franklin", weight: 600, size: 24 },
     body: { fontId: "libre-franklin", weight: 400, size: 16 },
   },
   {
