@@ -63,7 +63,9 @@ export default function Preview() {
           <div className="mx-auto max-w-3xl space-y-6 text-center">
             <div className="space-y-4">
               <h1 className="display leading-none text-pretty">
-                {t("display")}
+                {t.rich("display", {
+                  i: (chunks) => <em>{chunks}</em>,
+                })}
               </h1>
               <h2 className="leading-none text-pretty">{t("heading")}</h2>
             </div>
