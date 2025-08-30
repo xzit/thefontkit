@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+
 import { RiCheckLine, RiClipboardLine } from "@remixicon/react";
+
+import { cn } from "@/lib/utils";
+
+import { Button } from "@/components/ui/button";
 
 interface CopyablePreProps {
   children: React.ReactNode;

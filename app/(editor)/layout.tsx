@@ -1,18 +1,18 @@
 import Link from "next/link";
+
 import { useTranslations } from "next-intl";
 
-import { AppSidebar } from "@/components/app-sidebar";
-import { ModeToggle } from "@/components/theme-toggle";
+import { RiGithubFill, RiHeart3Fill } from "@remixicon/react";
 
+import { AppSidebar } from "@/components/app-sidebar";
 import Footer from "@/components/footer";
+import { ModeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
-
-import { RiGithubFill, RiHeart3Fill } from "@remixicon/react";
 
 export default function DashboardLayout({
   children,

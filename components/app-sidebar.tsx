@@ -1,10 +1,11 @@
 import * as React from "react";
+
 import Link from "next/link";
+
 import { useTranslations } from "next-intl";
 
-import FontInstall from "@/components/install-dialog";
 import Editor from "@/components/editor";
-
+import FontInstall from "@/components/install-dialog";
 import {
   Sidebar,
   SidebarContent,

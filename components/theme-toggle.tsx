@@ -1,8 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { useTheme } from "next-themes";
+
 import { useTranslations } from "next-intl";
+
+import { RiContrastFill, RiMoonFill, RiSunFill } from "@remixicon/react";
+import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -11,8 +14,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-import { RiContrastFill, RiMoonFill, RiSunFill } from "@remixicon/react";
 
 export function ModeToggle() {
   const t = useTranslations("Components.theme");

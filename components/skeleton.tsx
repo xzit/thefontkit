@@ -1,7 +1,9 @@
 "use client";
 
 import * as React from "react";
+
 import { Slot } from "@radix-ui/react-slot";
+
 import { cn } from "@/lib/utils";
 
 interface SkeletonProps extends React.HTMLAttributes<HTMLElement> {

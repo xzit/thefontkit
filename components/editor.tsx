@@ -1,31 +1,31 @@
 "use client";
 
+import Link from "next/link";
+
 import { useTranslations } from "next-intl";
 
-import { useSelectedFont } from "@/stores/selected-fonts";
 import { useFontStore } from "@/stores/fonts";
+import { useSelectedFont } from "@/stores/selected-fonts";
+import {
+  RiArrowRightSLine,
+  RiExternalLinkLine,
+  RiFontSansSerif,
+} from "@remixicon/react";
 
-import { FontCombobox, type Font } from "@/components/font-combobox";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
+import { type Font, FontCombobox } from "@/components/font-combobox";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
 import { Slider } from "@/components/ui/slider";
-
-import {
-  RiArrowRightSLine,
-  RiExternalLinkLine,
-  RiFontSansSerif,
-} from "@remixicon/react";
-import Link from "next/link";
 
 interface FontSelectorProps {
   label: string;

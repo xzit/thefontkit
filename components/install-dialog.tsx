@@ -1,11 +1,20 @@
 "use client";
 
 import Link from "next/link";
+
 import { useTranslations } from "next-intl";
 
+import { useFavoritesFonts } from "@/stores/favorites-fonts";
 import { Font, useFontStore } from "@/stores/fonts";
 import { useSelectedFont } from "@/stores/selected-fonts";
-import { useFavoritesFonts } from "@/stores/favorites-fonts";
+import {
+  RiDownloadLine,
+  RiExternalLinkLine,
+  RiGlobalLine,
+  RiHeart3Fill,
+  RiHeart3Line,
+  RiTerminalLine,
+} from "@remixicon/react";
 
 import { CopyablePre } from "@/components/copyable-pre";
 import { Button } from "@/components/ui/button";
@@ -18,15 +27,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-import {
-  RiDownloadLine,
-  RiExternalLinkLine,
-  RiGlobalLine,
-  RiHeart3Fill,
-  RiHeart3Line,
-  RiTerminalLine,
-} from "@remixicon/react";
 
 function generateFontFaceCSS(font: Font) {
   const cssBlocks: string[] = [];

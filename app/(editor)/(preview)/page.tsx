@@ -1,17 +1,18 @@
 "use client";
 
 import { useState } from "react";
+
 import { useTranslations } from "next-intl";
 
-import { presets } from "@/lib/presets";
 import { useFontStore } from "@/stores/fonts";
 import { useSelectedFont } from "@/stores/selected-fonts";
+import { RiSparkling2Fill } from "@remixicon/react";
+
+import { presets } from "@/lib/presets";
 
 import PresetList from "@/components/preset-list";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-
-import { RiSparkling2Fill } from "@remixicon/react";
+import { Button } from "@/components/ui/button";
 
 export default function Preview() {
   const t = useTranslations("Dashboard.preview.homepage");
