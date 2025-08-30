@@ -2,10 +2,10 @@
 
 import { useEffect } from "react";
 
+import { generateFontFaceCSS } from "@/lib/generate";
+
 import { useFontStore } from "@/stores/fonts";
 import { useSelectedFont } from "@/stores/selected-fonts";
-
-import { generateFontFaceCSS } from "@/lib/generate";
 
 export default function DashboardLayout({
   children,

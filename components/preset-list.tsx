@@ -4,12 +4,11 @@ import { useState } from "react";
 
 import { useTranslations } from "next-intl";
 
+import { presets } from "@/lib/presets";
+
 import { useFavoritesFonts } from "@/stores/favorites-fonts";
 import { useFontStore } from "@/stores/fonts";
 import { useSelectedFont } from "@/stores/selected-fonts";
-import { RiHeart3Fill, RiHeart3Line } from "@remixicon/react";
-
-import { presets } from "@/lib/presets";
 
 import { Skeleton } from "@/components/skeleton";
 import { Button } from "@/components/ui/button";
@@ -20,6 +19,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
+import { RiHeart3Fill, RiHeart3Line } from "@remixicon/react";
 
 export default function PresetList() {
   const t = useTranslations("Dashboard.presets");

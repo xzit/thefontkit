@@ -4,10 +4,9 @@ import { useEffect, useState } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { useFontStore } from "@/stores/fonts";
-import { RiCheckFill, RiExpandUpDownFill } from "@remixicon/react";
-
 import { cn } from "@/lib/utils";
+
+import { useFontStore } from "@/stores/fonts";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -23,6 +22,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+
+import { RiCheckFill, RiExpandUpDownFill } from "@remixicon/react";
 
 export type Font = {
   id: string;

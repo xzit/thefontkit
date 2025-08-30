@@ -6,11 +6,6 @@ import { useTranslations } from "next-intl";
 
 import { useFontStore } from "@/stores/fonts";
 import { useSelectedFont } from "@/stores/selected-fonts";
-import {
-  RiArrowRightSLine,
-  RiExternalLinkLine,
-  RiFontSansSerif,
-} from "@remixicon/react";
 
 import { type Font, FontCombobox } from "@/components/font-combobox";
 import {
@@ -26,6 +21,12 @@ import {
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
 import { Slider } from "@/components/ui/slider";
+
+import {
+  RiArrowRightSLine,
+  RiExternalLinkLine,
+  RiFontSansSerif,
+} from "@remixicon/react";
 
 interface FontSelectorProps {
   label: string;
