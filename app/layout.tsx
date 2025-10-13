@@ -59,7 +59,7 @@ export default async function RootLayout({
         className={`${sans.variable} ${serif.variable} ${mono.variable} antialiased`}
       >
         <Script
-          src="https://insights.emprende.one/script.js"
+          src="https://insights.xzit.dev/script.js"
           data-website-id="77373d19-3ca1-4beb-8289-b4eaca5050f8"
           strategy="afterInteractive"
         />
