@@ -1,4 +1,6 @@
 onlyBuiltDependencies:
-  - "@tailwindcss/oxide"
+  - '@parcel/watcher'
+  - '@swc/core'
+  - '@tailwindcss/oxide'
   - sharp
   - unrs-resolver
